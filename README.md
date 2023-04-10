@@ -1,7 +1,7 @@
 # SER502-Spring2023-Team4
 This is a private repository for SER502 Project
 
-# Team Members:
+**Team Members:**
 
 1.Rohith Bellapu 
 2.Aakanksha Jain
@@ -11,26 +11,22 @@ This is a private repository for SER502 Project
 
 A demo of the project can be found here after milestone 1
 
-# Platform
+**Platform**
 
 MacOS
-Linux
 Windows
 
-# Tools
+**Tools**
 
-# Install Instructions
+**Install Instructions**
 
 git clone https://github.com/rpatil29/SER502-Spring2023-Team4.git
 
-# Run Instructions
+**Run Instructions**
 
 
 **Highlights**
 
 
-
-# Grammar Changes
-
-# Future Scope
+**Future Scope**
 
