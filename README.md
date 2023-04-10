@@ -26,7 +26,7 @@ git clone https://github.com/rpatil29/SER502-Spring2023-Team4.git
 # Run Instructions
 
 
-#Highlights
+**Highlights**
 
 
 
