@@ -3,7 +3,8 @@ This is a private repository for SER502 Project
 
 Team Members:
 
-Rohith Bellapu Aakanksha Jain
+Rohith Bellapu 
+Aakanksha Jain
 Vamsi Kolapalli
 Naheer Fatima
 Rushikesh Vinod Patil
