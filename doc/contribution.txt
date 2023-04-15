@@ -1,0 +1,41 @@
+SER 502 Contribution - Team 4
+
+
+
+
+Members -
+1. Rohith Bellapu
+2. Rushikesh Vinod Patil
+3. Aakanksha Jain
+4. Naheer Fatima
+5. Vamsi Kolapalli
+
+
+Week 1( April 5 - April 11)
+1.Aakanksha Jain
+      - Exploring and familiarizing with git 
+      - Learning prerequisites for compiler design
+      - Language Design
+2. Naheer Fatima
+      - Exploring and familiarizing with git 
+      - Learning prerequisites for compiler design
+      -Language Design
+3. Rushikesh Vinod Patil
+      - Setting up project in git
+      - Learning prerequisites for compiler design
+      - Grammar
+4. Rohith Bellapu
+      - Setting up project in git
+      - Learning prerequisites for compiler design
+5. Vamsi Kolapalli
+      - Learning prerequisites for compiler design.
+      - Language Design
+ 
+
+
+We are Planning to divide the remaining work as follows -
+Parser - Aakanksha Jain, Naheer Fatima
+Lexer -  Rushikesh
+Interpreter -  Rushikesh & Rohith
+Integration - Rohith & Vamsi
+Miscellaneous Tasks - Rohith Bellapu, Rushikesh Vinod Patil, Aakanksha Jain,Naheer Fatima, Vamsi Kolapalli.
