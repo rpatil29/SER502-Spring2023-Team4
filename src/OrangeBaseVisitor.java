@@ -37,13 +37,6 @@ public class OrangeBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitVariable_declaration(MochaParser.Variable_declarationContext ctx) { return visitChildren(ctx); }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
     @Override public T visitIdentifier(OrangeParser.IdentifierContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
