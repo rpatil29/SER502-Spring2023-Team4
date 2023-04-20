@@ -147,6 +147,16 @@ public interface OrangeListener extends ParseTreeListener {
 	 */
 	void exitBoolean_factor(OrangeParser.Boolean_factorContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link OrangeParser#comparison_expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparison_expression(OrangeParser.Comparison_expressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link OrangeParser#comparison_expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparison_expression(OrangeParser.Comparison_expressionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link OrangeParser#boolean_literal}.
 	 * @param ctx the parse tree
 	 */

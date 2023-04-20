@@ -184,6 +184,18 @@ public class OrangeBaseListener implements OrangeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterComparison_expression(OrangeParser.Comparison_expressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComparison_expression(OrangeParser.Comparison_expressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBoolean_literal(OrangeParser.Boolean_literalContext ctx) { }
 	/**
 	 * {@inheritDoc}
