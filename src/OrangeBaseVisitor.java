@@ -16,89 +16,89 @@ public class OrangeBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitProgram(OrangeParser.ProgramContext ctx) { return visitChildren(ctx); }
+    public T visitProgram(OrangeParser.ProgramContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitStatement_list(OrangeParser.Statement_listContext ctx) { return visitChildren(ctx); }
+    public T visitStatement_list(OrangeParser.Statement_listContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitStatement(OrangeParser.StatementContext ctx) { return visitChildren(ctx); }
+    public T visitStatement(OrangeParser.StatementContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitIdentifier(OrangeParser.IdentifierContext ctx) { return visitChildren(ctx); }
+    public T visitIdentifier(OrangeParser.IdentifierContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitAssignment(OrangeParser.AssignmentContext ctx) { return visitChildren(ctx); }
+    public T visitAssignment(OrangeParser.AssignmentContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitExpression(OrangeParser.ExpressionContext ctx) { return visitChildren(ctx); }
+    public T visitExpression(OrangeParser.ExpressionContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitNumeric_expression(OrangeParser.Numeric_expressionContext ctx) { return visitChildren(ctx); }
+    public T visitNumeric_expression(OrangeParser.Numeric_expressionContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitTernary_expression(OrangeParser. Ternary_expressionContext ctx) { return visitChildren(ctx); }
+    public T visitTernary_expression(OrangeParser. Ternary_expressionContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitConditional(OrangeParser.ConditionalContext ctx) { return visitChildren(ctx); }
+    public T visitConditional(OrangeParser.ConditionalContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitTraditional_for_loop(OrangeParser.Traditional_for_loopContext ctx) { return visitChildren(ctx); }
+    public T visitTraditional_for_loop(OrangeParser.Traditional_for_loopContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitTraditional_while_loop(OrangeParser.Traditional_while_loopContext ctx) { return visitChildren(ctx); }
+    public T visitTraditional_while_loop(OrangeParser.Traditional_while_loopContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitRange_for_loop(OrangeParser.Range_for_loopContext ctx) { return visitChildren(ctx); }
+    public T visitRange_for_loop(OrangeParser.Range_for_loopContext ctx) { return visitChildren(ctx); }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public T visitPrint_statement(OrangeParser.Print_statementContext ctx) { return visitChildren(ctx); }
+    public T visitPrint_statement(OrangeParser.Print_statementContext ctx) { return visitChildren(ctx); }
 }
