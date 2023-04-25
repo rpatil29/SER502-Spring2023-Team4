@@ -9,13 +9,13 @@ import java.util.Map;
 
 public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
 
-    private final PrintStream outputStream;
-    private final List<Error> semanticErrorList;
+    private final PrintStream outStream;
+    private final List<Error> ListSem_Error;
     private final Map<String, Variable> variableMap;
 
-    public MyOrangeVisitor(PrintStream outputStream) {
-        this.outputStream = outputStream;
-        this.semanticErrorList = new ArrayList<>();
+    public MyOrangeVisitor(PrintStream outStream) {
+        this.outStream = outStream;
+        this.ListSem_Error = new ArrayList<>();
         this.variableMap = new HashMap<>();
     }
 
@@ -23,26 +23,29 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         return visitChildren(ctx);
     }
 
-    @Override public Object visitStatement_list(OrangeParser.StatementContext ctx) {
+    @Override public Object visitStatement_list(OrangeParser.Statement_listContext ctx) {
         return visitChildren(ctx);
     }
-    private String variableDeclarationDataType = null;
+    @Override public Object visitStatement(OrangeParser.StatementContext ctx) {
+        return visitChildren(ctx);
+    }
+    private String var_dataType = null;
     @Override public Object visitIdentifier(OrangeParser.IdentifierContext ctx) {
-        variableDeclarationDataType = ctx.data_type().getText();
+        var_dataType = ctx.data_type().getText();
         return visitChildren(ctx);
     }
     @Override public Object visitAssignment(OrangeParser.AssignmentContext ctx) {
-        Token idToken = ctx.IDENTIFIER().getSymbol();
+        Token idToken = ctx.identifier().getSymbol();
         String identifier = ctx.IDENTIFIER().getText();
         if (!variableMap.containsKey(identifier)) {
-            semanticErrorList.add(new Error(String.format("variable '%s' is not declared", identifier),
+            ListSem_Error.add(new Error(String.format("variable '%s' is not declared", identifier),
                     idToken.getLine(), idToken.getCharPositionInLine() + 1));
         } else {
             try {
                 Object value = visit(ctx.expression());
                 variableMap.get(identifier).setValue(value);
             } catch (Exception ex) {
-                semanticErrorList.add(new Error(String.format("variable '%s' cannot be assigned to RHS: %s",
+                ListSem_Error.add(new Error(String.format("variable '%s' cannot be assigned to RHS: %s",
                         identifier, ex.getMessage()), idToken.getLine(), idToken.getCharPositionInLine() + 1));
             }
         }
@@ -81,7 +84,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
                 else if (operator.equals("*")) return leftOperandInt * rightOperandInt;
                 else if (operator.equals("/")) {
                     if (rightOperandInt != 0) return leftOperandInt / rightOperandInt;
-                    else semanticErrorList.add(new Error("divide by zero", operatorToken.getLine(),
+                    else ListSem_Error.add(new Error("divide by zero", operatorToken.getLine(),
                             operatorToken.getCharPositionInLine() + 1));
                 }
             } else { // FLOATING POINT ARITHMETIC
@@ -93,12 +96,12 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
                 else if (operator.equals("*")) return leftOperandDouble * rightOperandDouble;
                 else if (operator.equals("/")) {
                     if (rightOperandDouble != 0.0) return leftOperandDouble / rightOperandDouble;
-                    else semanticErrorList.add(new Error("divide by zero",  operatorToken.getLine(),
+                    else ListSem_Error.add(new Error("divide by zero",  operatorToken.getLine(),
                             operatorToken.getCharPositionInLine() + 1));
                 }
             }
         } else {
-            semanticErrorList.add(new Error("unsupported operands in arithmetic expression",
+            ListSem_Error.add(new Error("unsupported operands in arithmetic expression",
                     operatorToken.getLine(), operatorToken.getCharPositionInLine() + 1));
         }
         return null;
@@ -120,7 +123,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         Token idToken = ctx.for_expression().IDENTIFIER().getSymbol();
         String identifier = ctx.for_expression().IDENTIFIER().getText();
         if (variableMap.containsKey(identifier)) {
-            semanticErrorList.add(new Error(String.format("variable '%s' is previously declared", identifier),
+            ListSem_Error.add(new Error(String.format("variable '%s' is previously declared", identifier),
                     idToken.getLine(), idToken.getCharPositionInLine() + 1));
             return null;
         }
@@ -156,7 +159,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         Token idToken = ctx.IDENTIFIER().getSymbol();
         String identifier = ctx.IDENTIFIER().getText();
         if (variableMap.containsKey(identifier)) {
-            semanticErrorList.add(new Error(String.format("variable '%s' is previously declared", identifier),
+            ListSem_Error.add(new Error(String.format("variable '%s' is previously declared", identifier),
                     idToken.getLine(), idToken.getCharPositionInLine() + 1));
             return null;
         }
