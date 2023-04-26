@@ -47,122 +47,27 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         return null;
     }
 
-    @Override public Object visitExpression(OrangeParser.ExpressionContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public Object visitNumeric_expression(OrangeParser.Numeric_expressionContext ctx) {
-        if (ctx.numeric_expression().size() == 0)
-            return visitChildren(ctx);
-        else if (ctx.numeric_expression().size() == 1)
-            return visit(ctx.numeric_expression(0));
-
-        Object leftOperand = visit(ctx.numeric_expression(0));
-        Object rightOperand = visit(ctx.numeric_expression(1));
-
-        TerminalNode operatorNode = ctx.OP_ADD() != null ? ctx.OP_ADD()
-                : ctx.OP_SUB() != null ? ctx.OP_SUB()
-                : ctx.OP_MUL() != null ? ctx.OP_MUL()
-                : ctx.OP_DIV();
-        Token operatorToken = operatorNode.getSymbol();
-        String operator = operatorNode.getText();
-
-        if (leftOperand instanceof Integer && rightOperand instanceof Integer){
-            int leftOperandInt = (Integer) leftOperand;
-            int rightOperandInt = (Integer) rightOperand;
-
-            if (operator.equals("+")) return leftOperandInt + rightOperandInt;
-            else if (operator.equals("-")) return leftOperandInt - rightOperandInt;
-            else if (operator.equals("*")) return leftOperandInt * rightOperandInt;
-            else if (operator.equals("/")) {
-                if (rightOperandInt != 0) return leftOperandInt / rightOperandInt;
-                else semanticErrorList.add(new Error("divide by zero", operatorToken.getLine(),
-                        operatorToken.getCharPositionInLine() + 1));
-            } else {
-                semanticErrorList.add(new Error("unsupported operands in arithmetic expression",
-                        operatorToken.getLine(), operatorToken.getCharPositionInLine() + 1));
-            }
-        }
+    private final StringBuilder printBuffer = new StringBuilder();
+    @Override public Object visitPrint(OrangeParser.PrintContext ctx) {
+        visit(ctx.print_argument_list());
         return null;
     }
-
-
-    @Override
-    public Object visitComparison_expression(OrangeParser.Comparison_expressionContext ctx) {
-       if(ctx.expression_term().size()<2)
-           return visitChildren(ctx);
-
-       Object leftOperand = visit(ctx.expression_term(0));
-       Object rightOperand = visit(ctx.expression_term(1));
-
-        TerminalNode operatorNode = ctx.OP_EQUALS() != null ? ctx.OP_EQUALS()
-                : ctx.OP_GREATER() != null ? ctx.OP_GREATER()
-                : ctx.OP_SMALLER() != null ? ctx.OP_SMALLER()
-                : ctx.OP_GREATER_EQUALS() != null ? ctx.OP_GREATER_EQUALS()
-                : ctx.OP_SMALLER_EQUALS();
-        Token operatorToken = operatorNode.getSymbol();
-        String operator = operatorNode.getText();
-
-        if(leftOperand instanceof Integer && rightOperand instanceof Integer){
-            int leftOperandint = (Integer)leftOperand;
-            int rightOperandint = (Integer)rightOperand;
-
-            if (operator.equals("<")) return leftOperandint < rightOperandint;
-            else if (operator.equals(">"))return leftOperandint > rightOperandint;
-            else if (operator.equals("<=")) return leftOperandint <= rightOperandint;
-            else if (operator.equals(">=")) return leftOperandint >= rightOperandint;
-            else if (operator.equals("==")) return leftOperandint == rightOperandint;
-        }
-        else {
-            semanticErrorList.add(new Error("unsupported operands in relational expression",
-                    operatorToken.getLine(), operatorToken.getCharPositionInLine() + 1));
-        }
-        return null;
-    }
-
-    @Override public Object visitBoolean_expression(OrangeParser.Boolean_expressionContext ctx) {
-        if (ctx.OP_LOGICAL_NOT() != null)
-            return ! ((Boolean) visit(ctx.expression_term(0)));
-
-        if (ctx.expression_term().size() == 1)
-            return visit(ctx.expression_term(0));
-
-        Object leftOperand = visit(ctx.expression_term(0));
-        Object rightOperand = visit(ctx.expression_term(1));
-
-        TerminalNode operatorNode = ctx.OP_LOGICAL_AND() != null ? ctx.OP_LOGICAL_AND() : ctx.OP_LOGICAL_OR();
-        Token operatorToken = operatorNode.getSymbol();
-        String operator = operatorNode.getText();
-
-        if (leftOperand instanceof Boolean && rightOperand instanceof Boolean) {
-            if (operator.equals("&&")) return (Boolean)leftOperand && (Boolean)rightOperand;
-            else if (operator.equals("||")) return (Boolean)leftOperand || (Boolean)rightOperand;
-        } else {
-            semanticErrorList.add(new Error("unsupported operands in logical expression",
-                    operatorToken.getLine(), operatorToken.getCharPositionInLine() + 1));
-        }
-        return null;
-    }
-    @Override public Object visitTernary_expression(OrangeParser.Ternary_expressionContext ctx) {
-        Object conditionValue = visit(ctx.boolean_expression());
-        Object value1 = visit(ctx.expression(0));
-        Object value2 = visit(ctx.expression(1));
-        return (Boolean) conditionValue ? value1 : value2;
-    }
-
-    @Override public Object visitExpression_term(OrangeParser.Expression_termContext ctx){
-        if (ctx.BOOLEAN_FALSE() != null) return false;
-        else if (ctx.BOOLEAN_TRUE() != null) return true;
-        else if (ctx.IDENTIFIER() != null) {
+    @Override public Object visitPrint_argument_list(OrangeParser.Print_argument_listContext ctx) {
+        if (ctx.IDENTIFIER() != null) {
             Token idToken = ctx.IDENTIFIER().getSymbol();
             String identifier = ctx.IDENTIFIER().getText();
-            if (!variableMap.containsKey(ctx.IDENTIFIER().getText())) {
+            if (variableMap.containsKey(identifier)) {
+                printBuffer.append(variableMap.get(identifier).getValue());
+            } else {
                 semanticErrorList.add(new Error(String.format("variable '%s' is not declared", identifier),
                         idToken.getLine(), idToken.getCharPositionInLine() + 1));
             }
-            return variableMap.get(identifier).getValue();
-        } else return visit(ctx.literal());
+        } else if (ctx.literal() != null) {
+            printBuffer.append(visit(ctx.literal()));
+        }
+        return visitChildren(ctx);
     }
+
     @Override public Object visitConditional(OrangeParser.ConditionalContext ctx) {
         Object conditionValue = visit(ctx.expression());
         if ((Boolean) conditionValue) visit(ctx.statement_list(0));
@@ -170,6 +75,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
             visit(ctx.statement_list(1));
         return null;
     }
+
     @Override public Object visitTraditional_for_loop(OrangeParser.Traditional_for_loopContext ctx) {
         //TODO
         /*variableDeclared = ctx.IDENTIFIER().getText();
@@ -244,28 +150,157 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         }*/
         return null;
     }
-    private final StringBuilder printBuffer = new StringBuilder();
-    @Override public Object visitPrint(OrangeParser.PrintContext ctx) {
-        visit(ctx.print_argument_list());
-        return null;
-    }
-    @Override public Object visitPrint_argument_list(OrangeParser.Print_argument_listContext ctx) {
-        if (ctx.IDENTIFIER() != null) {
-            Token idToken = ctx.IDENTIFIER().getSymbol();
-            String identifier = ctx.IDENTIFIER().getText();
-            if (variableMap.containsKey(identifier)) {
-                printBuffer.append(variableMap.get(identifier).getValue());
-            } else {
-                semanticErrorList.add(new Error(String.format("variable '%s' is not declared", identifier),
-                        idToken.getLine(), idToken.getCharPositionInLine() + 1));
-            }
-        } else if (ctx.literal() != null) {
-            printBuffer.append(visit(ctx.literal()));
-        }
+
+
+    @Override public Object visitExpression(OrangeParser.ExpressionContext ctx) {
         return visitChildren(ctx);
     }
 
+    @Override public Object visitBoolean_expression(OrangeParser.Boolean_expressionContext ctx) {
+        if (ctx.OP_LOGICAL_NOT() != null)
+            return ! ((Boolean) visit(ctx.expression_term(0)));
+
+        if (ctx.expression_term().size() == 1)
+            return visit(ctx.expression_term(0));
+
+        Object leftOperand = visit(ctx.expression_term(0));
+        Object rightOperand = visit(ctx.expression_term(1));
+
+        TerminalNode operatorNode = ctx.OP_LOGICAL_AND() != null ? ctx.OP_LOGICAL_AND() : ctx.OP_LOGICAL_OR();
+        Token operatorToken = operatorNode.getSymbol();
+        String operator = operatorNode.getText();
+
+        if (leftOperand instanceof Boolean && rightOperand instanceof Boolean) {
+            if (operator.equals("&&")) return (Boolean)leftOperand && (Boolean)rightOperand;
+            else if (operator.equals("||")) return (Boolean)leftOperand || (Boolean)rightOperand;
+        } else {
+            semanticErrorList.add(new Error("unsupported operands in logical expression",
+                    operatorToken.getLine(), operatorToken.getCharPositionInLine() + 1));
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitComparison_expression(OrangeParser.Comparison_expressionContext ctx) {
+        if(ctx.expression_term().size()<2)
+            return visitChildren(ctx);
+
+        Object leftOperand = visit(ctx.expression_term(0));
+        Object rightOperand = visit(ctx.expression_term(1));
+
+        TerminalNode operatorNode = ctx.OP_EQUALS() != null ? ctx.OP_EQUALS()
+                : ctx.OP_GREATER() != null ? ctx.OP_GREATER()
+                : ctx.OP_SMALLER() != null ? ctx.OP_SMALLER()
+                : ctx.OP_GREATER_EQUALS() != null ? ctx.OP_GREATER_EQUALS()
+                : ctx.OP_SMALLER_EQUALS();
+        Token operatorToken = operatorNode.getSymbol();
+        String operator = operatorNode.getText();
+
+        if(leftOperand instanceof Integer && rightOperand instanceof Integer){
+            int leftOperandint = (Integer)leftOperand;
+            int rightOperandint = (Integer)rightOperand;
+
+            if (operator.equals("<")) return leftOperandint < rightOperandint;
+            else if (operator.equals(">"))return leftOperandint > rightOperandint;
+            else if (operator.equals("<=")) return leftOperandint <= rightOperandint;
+            else if (operator.equals(">=")) return leftOperandint >= rightOperandint;
+            else if (operator.equals("==")) return leftOperandint == rightOperandint;
+        }
+        else {
+            semanticErrorList.add(new Error("unsupported operands in relational expression",
+                    operatorToken.getLine(), operatorToken.getCharPositionInLine() + 1));
+        }
+        return null;
+    }
+
+    @Override public Object visitBoolean_literal(OrangeParser.Boolean_literalContext ctx) {
+        //TODO
+        return null;
+    }
+    @Override public Object visitNumeric_expression(OrangeParser.Numeric_expressionContext ctx) {
+        if (ctx.numeric_expression().size() == 0)
+            return visitChildren(ctx);
+        else if (ctx.numeric_expression().size() == 1)
+            return visit(ctx.numeric_expression(0));
+
+        Object leftOperand = visit(ctx.numeric_expression(0));
+        Object rightOperand = visit(ctx.numeric_expression(1));
+
+        TerminalNode operatorNode = ctx.OP_ADD() != null ? ctx.OP_ADD()
+                : ctx.OP_SUB() != null ? ctx.OP_SUB()
+                : ctx.OP_MUL() != null ? ctx.OP_MUL()
+                : ctx.OP_DIV();
+        Token operatorToken = operatorNode.getSymbol();
+        String operator = operatorNode.getText();
+
+        if (leftOperand instanceof Integer && rightOperand instanceof Integer){
+            int leftOperandInt = (Integer) leftOperand;
+            int rightOperandInt = (Integer) rightOperand;
+
+            if (operator.equals("+")) return leftOperandInt + rightOperandInt;
+            else if (operator.equals("-")) return leftOperandInt - rightOperandInt;
+            else if (operator.equals("*")) return leftOperandInt * rightOperandInt;
+            else if (operator.equals("/")) {
+                if (rightOperandInt != 0) return leftOperandInt / rightOperandInt;
+                else semanticErrorList.add(new Error("divide by zero", operatorToken.getLine(),
+                        operatorToken.getCharPositionInLine() + 1));
+            } else {
+                semanticErrorList.add(new Error("unsupported operands in arithmetic expression",
+                        operatorToken.getLine(), operatorToken.getCharPositionInLine() + 1));
+            }
+        }
+        return null;
+    }
+
+    @Override public Object visitString_expression(OrangeParser.String_expressionContext ctx) {
+    //TODO
+        return null;
+    }
+
+    @Override public Object visitString_term(OrangeParser.String_termContext ctx) {
+       //TODO
+        return null;
+    }
+
+    @Override public Object visitTernary_expression(OrangeParser.Ternary_expressionContext ctx) {
+        Object conditionValue = visit(ctx.boolean_expression());
+        Object value1 = visit(ctx.expression(0));
+        Object value2 = visit(ctx.expression(1));
+        return (Boolean) conditionValue ? value1 : value2;
+    }
+
+    @Override public Object visitExpression_term(OrangeParser.Expression_termContext ctx){
+        if (ctx.BOOLEAN_FALSE() != null) return false;
+        else if (ctx.BOOLEAN_TRUE() != null) return true;
+        else if (ctx.IDENTIFIER() != null) {
+            Token idToken = ctx.IDENTIFIER().getSymbol();
+            String identifier = ctx.IDENTIFIER().getText();
+            if (!variableMap.containsKey(ctx.IDENTIFIER().getText())) {
+                semanticErrorList.add(new Error(String.format("variable '%s' is not declared", identifier),
+                        idToken.getLine(), idToken.getCharPositionInLine() + 1));
+            }
+            return variableMap.get(identifier).getValue();
+        } else return visit(ctx.literal());
+    }
+
+    @Override public Object visitInteger_literal(OrangeParser.Integer_literalContext ctx) {
+        //TODO
+        return null;
+    }
+    @Override public Object visitString_literal(OrangeParser.String_literalContext ctx) {
+        //TODO
+        return null;
+    }
+    @Override public Object visitString_character(OrangeParser.String_characterContext ctx) {
+        return  null;
+    }
+
+    @Override public Object visitLiteral(OrangeParser.LiteralContext ctx) {
+        return null;
+        //todo
+    }
     public Map<String, Variable> getVariableMap() {
+        //TODo
         return variableMap;
     }
 
