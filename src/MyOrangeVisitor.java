@@ -201,13 +201,11 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         return null;
     }
     @Override public Object visitTraditional_while_loop(OrangeParser.Traditional_while_loopContext ctx) {
-        //TODO
-        /*Object conditionValue = visit(ctx.while_condition());
-        while ((Boolean) conditionValue) {
-            visit(ctx.body());
-            conditionValue = visit(ctx.while_condition());
+        Object conditionValue = visit(ctx.expression());
+        while((boolean)conditionValue){
+            visit(ctx.statement_list());
+            conditionValue = visit(ctx.expression());
         }
-        return null;*/
         return null;
     }
     @Override
@@ -265,5 +263,13 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
 
     public void evaluationResult() {
+        if (semanticErrorList.size() == 0) {
+            outputStream.println("Successful Program Evaluation.");
+            outputStream.println(printBuffer);
+        } else {
+            outputStream.println("Failed Program Evaluation. See the following Errors:");
+            for (Error semanticError : semanticErrorList)
+                outputStream.println(semanticError);
+        }
     }
 }
