@@ -47,15 +47,25 @@ public interface OrangeListener extends ParseTreeListener {
 	 */
 	void exitAssignment(OrangeParser.AssignmentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link OrangeParser#print_statement}.
+	 * Enter a parse tree produced by {@link OrangeParser#print}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrint_statement(OrangeParser.Print_statementContext ctx);
+	void enterPrint(OrangeParser.PrintContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link OrangeParser#print_statement}.
+	 * Exit a parse tree produced by {@link OrangeParser#print}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrint_statement(OrangeParser.Print_statementContext ctx);
+	void exitPrint(OrangeParser.PrintContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link OrangeParser#print_argument_list}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrint_argument_list(OrangeParser.Print_argument_listContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link OrangeParser#print_argument_list}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrint_argument_list(OrangeParser.Print_argument_listContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link OrangeParser#conditional}.
 	 * @param ctx the parse tree
@@ -127,26 +137,6 @@ public interface OrangeListener extends ParseTreeListener {
 	 */
 	void exitBoolean_expression(OrangeParser.Boolean_expressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link OrangeParser#boolean_term}.
-	 * @param ctx the parse tree
-	 */
-	void enterBoolean_term(OrangeParser.Boolean_termContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link OrangeParser#boolean_term}.
-	 * @param ctx the parse tree
-	 */
-	void exitBoolean_term(OrangeParser.Boolean_termContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link OrangeParser#boolean_factor}.
-	 * @param ctx the parse tree
-	 */
-	void enterBoolean_factor(OrangeParser.Boolean_factorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link OrangeParser#boolean_factor}.
-	 * @param ctx the parse tree
-	 */
-	void exitBoolean_factor(OrangeParser.Boolean_factorContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link OrangeParser#comparison_expression}.
 	 * @param ctx the parse tree
 	 */
@@ -176,26 +166,6 @@ public interface OrangeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNumeric_expression(OrangeParser.Numeric_expressionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link OrangeParser#numeric_term}.
-	 * @param ctx the parse tree
-	 */
-	void enterNumeric_term(OrangeParser.Numeric_termContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link OrangeParser#numeric_term}.
-	 * @param ctx the parse tree
-	 */
-	void exitNumeric_term(OrangeParser.Numeric_termContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link OrangeParser#numeric_factor}.
-	 * @param ctx the parse tree
-	 */
-	void enterNumeric_factor(OrangeParser.Numeric_factorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link OrangeParser#numeric_factor}.
-	 * @param ctx the parse tree
-	 */
-	void exitNumeric_factor(OrangeParser.Numeric_factorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link OrangeParser#string_expression}.
 	 * @param ctx the parse tree
@@ -227,25 +197,15 @@ public interface OrangeListener extends ParseTreeListener {
 	 */
 	void exitTernary_expression(OrangeParser.Ternary_expressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link OrangeParser#identifier}.
+	 * Enter a parse tree produced by {@link OrangeParser#expression_term}.
 	 * @param ctx the parse tree
 	 */
-	void enterIdentifier(OrangeParser.IdentifierContext ctx);
+	void enterExpression_term(OrangeParser.Expression_termContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link OrangeParser#identifier}.
+	 * Exit a parse tree produced by {@link OrangeParser#expression_term}.
 	 * @param ctx the parse tree
 	 */
-	void exitIdentifier(OrangeParser.IdentifierContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link OrangeParser#identifier_tail}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentifier_tail(OrangeParser.Identifier_tailContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link OrangeParser#identifier_tail}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentifier_tail(OrangeParser.Identifier_tailContext ctx);
+	void exitExpression_term(OrangeParser.Expression_termContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link OrangeParser#integer_literal}.
 	 * @param ctx the parse tree
@@ -277,33 +237,13 @@ public interface OrangeListener extends ParseTreeListener {
 	 */
 	void exitString_character(OrangeParser.String_characterContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link OrangeParser#letter}.
+	 * Enter a parse tree produced by {@link OrangeParser#literal}.
 	 * @param ctx the parse tree
 	 */
-	void enterLetter(OrangeParser.LetterContext ctx);
+	void enterLiteral(OrangeParser.LiteralContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link OrangeParser#letter}.
+	 * Exit a parse tree produced by {@link OrangeParser#literal}.
 	 * @param ctx the parse tree
 	 */
-	void exitLetter(OrangeParser.LetterContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link OrangeParser#digit}.
-	 * @param ctx the parse tree
-	 */
-	void enterDigit(OrangeParser.DigitContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link OrangeParser#digit}.
-	 * @param ctx the parse tree
-	 */
-	void exitDigit(OrangeParser.DigitContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link OrangeParser#special_character}.
-	 * @param ctx the parse tree
-	 */
-	void enterSpecial_character(OrangeParser.Special_characterContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link OrangeParser#special_character}.
-	 * @param ctx the parse tree
-	 */
-	void exitSpecial_character(OrangeParser.Special_characterContext ctx);
+	void exitLiteral(OrangeParser.LiteralContext ctx);
 }
