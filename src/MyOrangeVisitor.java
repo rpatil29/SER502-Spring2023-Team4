@@ -179,17 +179,12 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
                     idToken.getLine(), idToken.getCharPositionInLine() + 1));
             return null;
         }
-
-
-
         try {
             int start = Integer.parseInt(ctx.for_expression().INTEGER_LITERAL(0).getText());
             int end = Integer.parseInt(ctx.for_expression().INTEGER_LITERAL(1).getText());
-
             Variable variable = new Variable("int");
             variable.setValue(start);
             variableMap.put(identifier, variable);
-
             for (int i = start; i <= end; i++) {
                 variableMap.get(identifier).setValue(i);
                 visit(ctx.body());
@@ -201,13 +196,11 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         return null;
     }
     @Override public Object visitTraditional_while_loop(OrangeParser.Traditional_while_loopContext ctx) {
-        //TODO
-        /*Object conditionValue = visit(ctx.while_condition());
-        while ((Boolean) conditionValue) {
-            visit(ctx.body());
-            conditionValue = visit(ctx.while_condition());
+        Object conditionValue = visit(ctx.expression());
+        while((boolean)conditionValue){
+            visit(ctx.statement_list());
+            conditionValue = visit(ctx.expression());
         }
-        return null;*/
         return null;
     }
     @Override
@@ -220,15 +213,12 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
                     idToken.getLine(), idToken.getCharPositionInLine() + 1));
             return null;
         }
-
         try {
             int start = Integer.parseInt(ctx.range().INTEGER_LITERAL(0).getText());
             int end = Integer.parseInt(ctx.range().INTEGER_LITERAL(1).getText());
-
             Variable variable = new Variable("int");
             variable.setValue(start);
             variableMap.put(identifier, variable);
-
             for (int i = start; i <= end; i++) {
                 variableMap.get(identifier).setValue(i);
                 visit(ctx.body());
@@ -265,5 +255,13 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
 
     public void evaluationResult() {
+        if (semanticErrorList.size() == 0) {
+            outputStream.println("Successful Program Evaluation.");
+            outputStream.println(printBuffer);
+        } else {
+            outputStream.println("Failed Program Evaluation. See the following Errors:");
+            for (Error semanticError : semanticErrorList)
+                outputStream.println(semanticError);
+        }
     }
 }
