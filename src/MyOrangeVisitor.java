@@ -67,7 +67,6 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         }
         return visitChildren(ctx);
     }
-
     @Override public Object visitConditional(OrangeParser.ConditionalContext ctx) {
         Object conditionValue = visit(ctx.expression());
         if ((Boolean) conditionValue) visit(ctx.statement_list(0));
@@ -85,12 +84,6 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
                     idToken.getLine(), idToken.getCharPositionInLine() + 1));
             return null;
         }
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> c0b53d2 (Update to visitor class, added TODO)
         try {
             int start = Integer.parseInt(ctx.for_expression().INTEGER_LITERAL(0).getText());
             int end = Integer.parseInt(ctx.for_expression().INTEGER_LITERAL(1).getText());
@@ -108,20 +101,11 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         return null;
     }
     @Override public Object visitTraditional_while_loop(OrangeParser.Traditional_while_loopContext ctx) {
-<<<<<<< HEAD
         Object conditionValue = visit(ctx.expression());
         while((boolean)conditionValue){
             visit(ctx.statement_list());
             conditionValue = visit(ctx.expression());
-=======
-        //TODO
-        /*Object conditionValue = visit(ctx.while_condition());
-        while ((Boolean) conditionValue) {
-            visit(ctx.body());
-            conditionValue = visit(ctx.while_condition());
->>>>>>> c0b53d2 (Update to visitor class, added TODO)
         }
-        return null;*/
         return null;
     }
     @Override
@@ -305,7 +289,6 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
 
     public void evaluationResult() {
-<<<<<<< HEAD
         if (semanticErrorList.size() == 0) {
             outputStream.println("Successful Program Evaluation.");
             outputStream.println(printBuffer);
@@ -316,7 +299,3 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         }
     }
 }
-=======
-    }
-}
->>>>>>> c0b53d2 (Update to visitor class, added TODO)
