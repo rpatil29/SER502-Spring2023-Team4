@@ -147,16 +147,6 @@ public interface OrangeListener extends ParseTreeListener {
 	 */
 	void exitComparison_expression(OrangeParser.Comparison_expressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link OrangeParser#boolean_literal}.
-	 * @param ctx the parse tree
-	 */
-	void enterBoolean_literal(OrangeParser.Boolean_literalContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link OrangeParser#boolean_literal}.
-	 * @param ctx the parse tree
-	 */
-	void exitBoolean_literal(OrangeParser.Boolean_literalContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link OrangeParser#numeric_expression}.
 	 * @param ctx the parse tree
 	 */
@@ -206,36 +196,6 @@ public interface OrangeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpression_term(OrangeParser.Expression_termContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link OrangeParser#integer_literal}.
-	 * @param ctx the parse tree
-	 */
-	void enterInteger_literal(OrangeParser.Integer_literalContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link OrangeParser#integer_literal}.
-	 * @param ctx the parse tree
-	 */
-	void exitInteger_literal(OrangeParser.Integer_literalContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link OrangeParser#string_literal}.
-	 * @param ctx the parse tree
-	 */
-	void enterString_literal(OrangeParser.String_literalContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link OrangeParser#string_literal}.
-	 * @param ctx the parse tree
-	 */
-	void exitString_literal(OrangeParser.String_literalContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link OrangeParser#string_character}.
-	 * @param ctx the parse tree
-	 */
-	void enterString_character(OrangeParser.String_characterContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link OrangeParser#string_character}.
-	 * @param ctx the parse tree
-	 */
-	void exitString_character(OrangeParser.String_characterContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link OrangeParser#literal}.
 	 * @param ctx the parse tree

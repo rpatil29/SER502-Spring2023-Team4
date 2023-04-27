@@ -184,18 +184,6 @@ public class OrangeBaseListener implements OrangeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBoolean_literal(OrangeParser.Boolean_literalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBoolean_literal(OrangeParser.Boolean_literalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterNumeric_expression(OrangeParser.Numeric_expressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -251,42 +239,6 @@ public class OrangeBaseListener implements OrangeListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpression_term(OrangeParser.Expression_termContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInteger_literal(OrangeParser.Integer_literalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInteger_literal(OrangeParser.Integer_literalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterString_literal(OrangeParser.String_literalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitString_literal(OrangeParser.String_literalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterString_character(OrangeParser.String_characterContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitString_character(OrangeParser.String_characterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -94,12 +94,6 @@ public interface OrangeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitComparison_expression(OrangeParser.Comparison_expressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link OrangeParser#boolean_literal}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBoolean_literal(OrangeParser.Boolean_literalContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link OrangeParser#numeric_expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -129,24 +123,6 @@ public interface OrangeVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpression_term(OrangeParser.Expression_termContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link OrangeParser#integer_literal}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInteger_literal(OrangeParser.Integer_literalContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link OrangeParser#string_literal}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitString_literal(OrangeParser.String_literalContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link OrangeParser#string_character}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitString_character(OrangeParser.String_characterContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link OrangeParser#literal}.
 	 * @param ctx the parse tree
