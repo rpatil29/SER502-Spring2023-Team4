@@ -232,13 +232,35 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
 
     @Override public Object visitString_expression(OrangeParser.String_expressionContext ctx) {
-    //TODO
-        return null;
+    StringBuilder sb = new StringBuilder();
+    for ( OrangeParser.String_termContext termContext : ctx.string_term())
+    {
+        sb.append(visitString_term(termContext));
+    }
+    return sb.toString();
     }
 
     @Override public Object visitString_term(OrangeParser.String_termContext ctx) {
-       //TODO
-        return null;
+       if(ctx.IDENTIFIER()!=null)
+       {
+           String identifier = ctx.IDENTIFIER().getText();
+           Token idToken = ctx.IDENTIFIER().getSymbol();
+           if (variableMap.containsKey(identifier)) {
+               return variableMap.get(identifier).getValue();
+           } else {
+               semanticErrorList.add(new Error(String.format("variable '%s' is not declared", identifier),
+                       idToken.getLine(), idToken.getCharPositionInLine() + 1));
+           }
+       }
+       else {
+           try {
+               return ctx.STRING_L().toString();
+           }
+           catch (Exception e){
+               System.out.println(e);
+           }
+       }
+       return null;
     }
 
     @Override public Object visitTernary_expression(OrangeParser.Ternary_expressionContext ctx) {
