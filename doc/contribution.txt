@@ -8,7 +8,7 @@ Members -
 5. Vamsi Kolapalli
 --------------------------------------------------------------
 
-Week 1( April 5 - April 11)
+Milestone 1( April 5 - April 11)
 1.Aakanksha Jain
       - Exploring and familiarizing with git 
       - Learning prerequisites for compiler design
@@ -27,12 +27,31 @@ Week 1( April 5 - April 11)
 5. Vamsi Kolapalli
       - Learning prerequisites for compiler design.
       - Language Design
+ -----------------------------------------------------------------
+MILESTONE 2:
+
+1. Rohith Bellapu
+      -Worked on the Logical and Ternary expression semantics.
+      -Worked on implementing for loop evaluator, if-else evaluator
+      -Wrote running samples
+
+2. Rushikesh Vinod Patil
+      -Worked on developing the grammar rules in ANTLR
+      -Development of the GUI
+      -Contributed to the development of the evaluator, precisely in trapping the semantic errors and reviewing the code and fixing bugs
+
+3. Aakanksha Jain
+      -Worked on implementing assignment evaluator, while loop evaluator
+      -Worked on updating the grammar rules to be more specific
+      -Prepared the presentation slides
+
+4. Vamsi Kolapalli
+      -Worked on implementing for if-else evaluator
+      -Worked on implementing the for in range evaluator
+      -Did integration 
+     
+5. Naheer Fatima
+      -Worked on the presentation slides
+      -Worked on MyOrangeVisitor class to implement the expression semantics.
+      -Worked on implementing the declaration evaluator
  
-
-
-We are Planning to divide the remaining work as follows -
-Parser - Aakanksha Jain, Naheer Fatima
-Lexer -  Rushikesh
-Interpreter -  Rushikesh & Rohith
-Integration - Rohith & Vamsi
-Miscellaneous Tasks - Rohith Bellapu, Rushikesh Vinod Patil, Aakanksha Jain,Naheer Fatima, Vamsi Kolapalli.
