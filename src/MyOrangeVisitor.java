@@ -288,7 +288,6 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         //todo
     }
     public Map<String, Variable> getVariableMap() {
-        //TODo
         return variableMap;
     }
 
