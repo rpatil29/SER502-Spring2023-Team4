@@ -117,6 +117,16 @@ public interface OrangeListener extends ParseTreeListener {
 	 */
 	void exitRange_for_loop(OrangeParser.Range_for_loopContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link OrangeParser#range}.
+	 * @param ctx the parse tree
+	 */
+	void enterRange(OrangeParser.RangeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link OrangeParser#range}.
+	 * @param ctx the parse tree
+	 */
+	void exitRange(OrangeParser.RangeContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link OrangeParser#expression}.
 	 * @param ctx the parse tree
 	 */

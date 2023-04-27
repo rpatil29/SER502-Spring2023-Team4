@@ -1,6 +1,10 @@
 public class Variable {
 
     private Object value;
+
+    public Variable(String anInt) {
+    }
+
     public Object getType() {
         return this.value;
     }

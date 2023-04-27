@@ -37,7 +37,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
             semanticErrorList.add(new Error(String.format("variable '%s' is not declared", variableDeclared), idToken.getLine(), idToken.getCharPositionInLine() + 1));
         } else {
             try {
-                Object value = visit(ctx.expression());
+                Object value = visit(ctx.literal());
                 variableMap.get(variableDeclared).setValue(value);
             } catch (Exception ex) {
                 semanticErrorList.add(new Error(String.format("variable '%s' cannot be assigned to RHS: %s",
@@ -76,8 +76,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
 
     @Override public Object visitTraditional_for_loop(OrangeParser.Traditional_for_loopContext ctx) {
-        //TODO
-        /*variableDeclared = ctx.IDENTIFIER().getText();
+        variableDeclared = ctx.IDENTIFIER().getText();
         Token idToken = ctx.IDENTIFIER().getSymbol();
         if (variableMap.containsKey(variableDeclared)) {
             semanticErrorList.add(new Error(String.format("variable '%s' is previously declared", variableDeclared),
@@ -85,19 +84,18 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
             return null;
         }
         try {
-            int start = Integer.parseInt(ctx.for_expression().INTEGER_LITERAL(0).getText());
-            int end = Integer.parseInt(ctx.for_expression().INTEGER_LITERAL(1).getText());
+            int start = Integer.parseInt(ctx.expression_term().literal().INTEGER_L().getText());
             Variable variable = new Variable("int");
             variable.setValue(start);
-            variableMap.put(identifier, variable);
-            for (int i = start; i <= end; i++) {
-                variableMap.get(identifier).setValue(i);
-                visit(ctx.body());
+            variableMap.put(variableDeclared, variable);
+            for (int i = start; (Boolean)visit(ctx.comparison_expression()); visit(ctx.expression())) {
+                variableMap.get(variableDeclared).setValue(i);
+                visit(ctx.statement_list());
             }
         } catch (Exception ignored) {
         } finally {
-            variableMap.remove(identifier);
-        }*/
+            variableMap.remove(variableDeclared);
+        }
         return null;
     }
     @Override public Object visitTraditional_while_loop(OrangeParser.Traditional_while_loopContext ctx) {
@@ -110,8 +108,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
     @Override
     public Object visitRange_for_loop(OrangeParser.Range_for_loopContext ctx) {
-        //TODO
-        /*Token idToken = ctx.IDENTIFIER().getSymbol();
+        Token idToken = ctx.IDENTIFIER().getSymbol();
         String identifier = ctx.IDENTIFIER().getText();
         if (variableMap.containsKey(identifier)) {
             semanticErrorList.add(new Error(String.format("variable '%s' is previously declared", identifier),
@@ -119,19 +116,19 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
             return null;
         }
         try {
-            int start = Integer.parseInt(ctx.range().INTEGER_LITERAL(0).getText());
-            int end = Integer.parseInt(ctx.range().INTEGER_LITERAL(1).getText());
+            int start = Integer.parseInt(ctx.range().INTEGER_L(0).getText());
+            int end = Integer.parseInt(ctx.range().INTEGER_L(1).getText());
             Variable variable = new Variable("int");
             variable.setValue(start);
             variableMap.put(identifier, variable);
             for (int i = start; i <= end; i++) {
                 variableMap.get(identifier).setValue(i);
-                visit(ctx.body());
+                visit(ctx.statement_list());
             }
         } catch (Exception ignored) {
         } finally {
             variableMap.remove(identifier);
-        }*/
+        }
         return null;
     }
 
@@ -203,31 +200,50 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
             return visit(ctx.numeric_expression(0));
 
         Object leftOperand = visit(ctx.numeric_expression(0));
-        Object rightOperand = visit(ctx.numeric_expression(1));
+        if(visit(ctx.numeric_expression(1)) != null) {
+            Object rightOperand = visit(ctx.numeric_expression(1));
 
-        TerminalNode operatorNode = ctx.OP_ADD() != null ? ctx.OP_ADD()
-                : ctx.OP_SUB() != null ? ctx.OP_SUB()
-                : ctx.OP_MUL() != null ? ctx.OP_MUL()
-                : ctx.OP_DIV();
-        Token operatorToken = operatorNode.getSymbol();
-        String operator = operatorNode.getText();
+            TerminalNode operatorNode = ctx.OP_ADD() != null ? ctx.OP_ADD()
+                    : ctx.OP_SUB() != null ? ctx.OP_SUB()
+                    : ctx.OP_MUL() != null ? ctx.OP_MUL()
+                    : ctx.OP_DIV();
+            Token operatorToken = operatorNode.getSymbol();
+            String operator = operatorNode.getText();
 
-        if (leftOperand instanceof Integer && rightOperand instanceof Integer){
-            int leftOperandInt = (Integer) leftOperand;
-            int rightOperandInt = (Integer) rightOperand;
+            if (leftOperand instanceof Integer && rightOperand instanceof Integer) {
+                int leftOperandInt = (Integer) leftOperand;
+                int rightOperandInt = (Integer) rightOperand;
 
-            if (operator.equals("+")) return leftOperandInt + rightOperandInt;
-            else if (operator.equals("-")) return leftOperandInt - rightOperandInt;
-            else if (operator.equals("*")) return leftOperandInt * rightOperandInt;
-            else if (operator.equals("/")) {
-                if (rightOperandInt != 0) return leftOperandInt / rightOperandInt;
-                else semanticErrorList.add(new Error("divide by zero", operatorToken.getLine(),
-                        operatorToken.getCharPositionInLine() + 1));
-            } else {
+                if (operator.equals("+")) return leftOperandInt + rightOperandInt;
+                else if (operator.equals("-")) return leftOperandInt - rightOperandInt;
+                else if (operator.equals("*")) return leftOperandInt * rightOperandInt;
+                else if (operator.equals("/")) {
+                    if (rightOperandInt != 0) return leftOperandInt / rightOperandInt;
+                    else semanticErrorList.add(new Error("divide by zero", operatorToken.getLine(),
+                            operatorToken.getCharPositionInLine() + 1));
+                } else {
+                    semanticErrorList.add(new Error("unsupported operands in arithmetic expression",
+                            operatorToken.getLine(), operatorToken.getCharPositionInLine() + 1));
+                }
+            }
+        }
+        else{
+            TerminalNode operatorNode = ctx.OP_ADD() != null ? ctx.OP_ADD()
+                    : ctx.OP_SUB();
+            Token operatorToken = operatorNode.getSymbol();
+            String operator = operatorNode.getText();
+            if (leftOperand instanceof Integer) {
+                int leftOperandInt = (Integer) leftOperand;
+
+                if (operator.equals("++")) return leftOperandInt +1;
+                else if (operator.equals("--")) return leftOperandInt -1;
+            }
+            else {
                 semanticErrorList.add(new Error("unsupported operands in arithmetic expression",
                         operatorToken.getLine(), operatorToken.getCharPositionInLine() + 1));
             }
         }
+
         return null;
     }
 
