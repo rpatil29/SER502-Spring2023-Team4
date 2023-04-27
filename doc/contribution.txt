@@ -28,11 +28,11 @@ Milestone 1( April 5 - April 11)
       - Learning prerequisites for compiler design.
       - Language Design
  -----------------------------------------------------------------
-MILESTONE 2:
+MILESTONE 2(April 12- April 28)
 
 1. Rohith Bellapu
       -Worked on the Logical and Ternary expression semantics.
-      -Worked on implementing for loop evaluator, if-else evaluator
+      -Worked on implementing for loop evaluator
       -Wrote running samples
 
 2. Rushikesh Vinod Patil
@@ -51,7 +51,7 @@ MILESTONE 2:
       -Did integration 
      
 5. Naheer Fatima
-      -Worked on the presentation slides
+      -Prepared the presentation slides
       -Worked on MyOrangeVisitor class to implement the expression semantics.
       -Worked on implementing the declaration evaluator
  
