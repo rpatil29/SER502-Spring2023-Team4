@@ -29,8 +29,6 @@ boolean_expression: expression_term (OP_LOGICAL_AND | OP_LOGICAL_OR) expression_
 
 comparison_expression: expression_term (OP_EQUALS | OP_GREATER | OP_SMALLER | OP_GREATER_EQUALS | OP_SMALLER_EQUALS) expression_term;
 
-boolean_literal: BOOLEAN_TRUE | BOOLEAN_FALSE;
-
 numeric_expression: expression_term
                     | '(' numeric_expression ')'
                     | numeric_expression (OP_ADD|OP_SUB) numeric_expression
@@ -40,7 +38,7 @@ numeric_expression: expression_term
 
 string_expression: string_term ( OP_ADD string_term)*;
 
-string_term: string_literal | IDENTIFIER;
+string_term: STRING_L | IDENTIFIER;
 
 ternary_expression: boolean_expression OP_TERNARY_TRUE expression OP_TERNARY_FALSE expression;
 
@@ -48,15 +46,13 @@ expression_term : IDENTIFIER | literal | BOOLEAN_FALSE | BOOLEAN_TRUE;
 
 IDENTIFIER : [a-zA-Z_][a-zA-Z0-9_]*;
 
-integer_literal: DIGIT+;
+literal : STRING_L | INTEGER_L | BOOLEAN_L;
 
-string_literal: '"' string_character* '"';
+BOOLEAN_L : BOOLEAN_FALSE | BOOLEAN_TRUE;
 
-string_character: LETTER;
+INTEGER_L: DIGIT+;
 
-literal : string_literal | integer_literal | boolean_literal;
-
-LETTER : '"' .*? '"';
+STRING_L: '"' .*? '"';
 
 DIGIT : [+-]? [0-9] | [+-]? [1-9][0-9]+;
 
