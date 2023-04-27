@@ -2,30 +2,21 @@
 This is a private repository for SER502 Project
 
 **Team Members:**
-
 1.Rohith Bellapu
-
 2.Aakanksha Jain
-
 3.Vamsi Kolapalli
-
 4.Naheer Fatima
-
 5.Rushikesh Vinod Patil
 
-
 A demo of the project can be found here after milestone 1
-
 
 **Platform**
 
 MacOS
-
 Windows
 
-
 **Tools**
-
+ANTLR
 
 **Install Instructions**
 
@@ -36,7 +27,15 @@ git clone https://github.com/rpatil29/SER502-Spring2023-Team4.git
 
 
 **Highlights**
-
+-Supports primitive data types such as int, Boolean and String
+-Support for Arithmetic operations such as addition, subtraction, multiplication and division on the data types
+-Support for Logical operations such as AND, OR and NOT.
+-Supports looping structures like if-else, for, for in range and while.
+-Support for Relational operations such as ==, <, > , <=, >=.
+-Support for Assignment operator which associates a value with an identiﬁer.
+-Support for ternary operator like ? :
 
 **Future Scope**
-
+In terms of future scope, the language could be extended to support these advanced features and integrated with 
+other tools and libraries to make it more powerful and useful. Additionally, the language could be optimized to improve 
+its performance and make it suitable for building high-performance applications
