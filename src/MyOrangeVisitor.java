@@ -196,11 +196,6 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         }
         return null;
     }
-
-    @Override public Object visitBoolean_literal(OrangeParser.Boolean_literalContext ctx) {
-        //TODO
-        return null;
-    }
     @Override public Object visitNumeric_expression(OrangeParser.Numeric_expressionContext ctx) {
         if (ctx.numeric_expression().size() == 0)
             return visitChildren(ctx);
@@ -266,19 +261,6 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
             return variableMap.get(identifier).getValue();
         } else return visit(ctx.literal());
     }
-
-    @Override public Object visitInteger_literal(OrangeParser.Integer_literalContext ctx) {
-        //TODO
-        return null;
-    }
-    @Override public Object visitString_literal(OrangeParser.String_literalContext ctx) {
-        //TODO
-        return null;
-    }
-    @Override public Object visitString_character(OrangeParser.String_characterContext ctx) {
-        return  null;
-    }
-
     @Override public Object visitLiteral(OrangeParser.LiteralContext ctx) {
         return null;
         //todo
