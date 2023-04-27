@@ -228,8 +228,8 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
             }
         }
         else{
-            TerminalNode operatorNode = ctx.OP_ADD() != null ? ctx.OP_ADD()
-                    : ctx.OP_SUB();
+            TerminalNode operatorNode = ctx.OP_SUCCESSOR() != null ? ctx.OP_SUCCESSOR()
+                    : ctx.OP_PREDECESSOR();
             Token operatorToken = operatorNode.getSymbol();
             String operator = operatorNode.getText();
             if (leftOperand instanceof Integer) {
