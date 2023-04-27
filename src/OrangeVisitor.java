@@ -129,4 +129,10 @@ public interface OrangeVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLiteral(OrangeParser.LiteralContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link OrangeParser#data_type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitData_type(OrangeParser.Data_typeContext ctx);
 }

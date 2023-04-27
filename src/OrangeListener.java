@@ -206,4 +206,14 @@ public interface OrangeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLiteral(OrangeParser.LiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link OrangeParser#data_type}.
+	 * @param ctx the parse tree
+	 */
+	void enterData_type(OrangeParser.Data_typeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link OrangeParser#data_type}.
+	 * @param ctx the parse tree
+	 */
+	void exitData_type(OrangeParser.Data_typeContext ctx);
 }

@@ -4,11 +4,12 @@ program: statement_list;
 
 statement_list: statement (OP_SEMICOLON statement)*;
 
-statement: assignment | print | conditional | loop;
-
-assignment: IDENTIFIER OP_ASSIGN expression;
+statement:assignment | print | conditional | loop;
+/* ASSIGNMENT STATEMENT DEFINITION */
+assignment : (data_type)? IDENTIFIER OP_ASSIGN (literal | expression);
 
 print: 'print' '(' print_argument_list ')' ;
+
 print_argument_list
     : IDENTIFIER (',' print_argument_list)?
     | literal (',' print_argument_list)? ;
@@ -46,19 +47,20 @@ expression_term : IDENTIFIER | literal | BOOLEAN_FALSE | BOOLEAN_TRUE;
 
 IDENTIFIER : [a-zA-Z_][a-zA-Z0-9_]*;
 
-literal : STRING_L | INTEGER_L | BOOLEAN_L;
+literal : STRING_L | INTEGER_L | BOOLEAN_L ;
 
-BOOLEAN_L : BOOLEAN_FALSE | BOOLEAN_TRUE;
+BOOLEAN_L : 'true' | 'false';
 
 INTEGER_L: DIGIT+;
 
 STRING_L: '"' .*? '"';
 
-DIGIT : [+-]? [0-9] | [+-]? [1-9][0-9]+;
+DIGIT : [0-9] | [1-9][0-9]+;
 
 BOOLEAN_TRUE : 'true' ;
 BOOLEAN_FALSE : 'false' ;
 
+data_type : 'int' | 'boolean' | 'string';
 
 /* ASSIGNMENT OPERATOR DEFINITION */
 OP_ASSIGN : '=';

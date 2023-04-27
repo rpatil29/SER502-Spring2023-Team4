@@ -29,24 +29,56 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
 
     @Override public Object visitStatement(OrangeParser.StatementContext ctx) { return visitChildren(ctx); }
     private String variableDeclared = null;
+    private String declarationDataType = null;
     @Override public Object visitAssignment(OrangeParser.AssignmentContext ctx) {
-        variableDeclared = ctx.IDENTIFIER().getText();
+        //(data_type)? IDENTIFIER OP_ASSIGN (literal | expression);
+        if(ctx.data_type().getText()!=null){
+            declarationDataType = ctx.data_type().getText();
+        }
         Token idToken = ctx.IDENTIFIER().getSymbol();
-
+        variableDeclared  = ctx.IDENTIFIER().getText();
         if (!variableMap.containsKey(variableDeclared)) {
-            semanticErrorList.add(new Error(String.format("variable '%s' is not declared", variableDeclared), idToken.getLine(), idToken.getCharPositionInLine() + 1));
-        } else {
-            try {
-                Object value = visit(ctx.expression());
-                variableMap.get(variableDeclared).setValue(value);
-            } catch (Exception ex) {
-                semanticErrorList.add(new Error(String.format("variable '%s' cannot be assigned to RHS: %s",
-                        variableDeclared, ex.getMessage()), idToken.getLine(), idToken.getCharPositionInLine() + 1));
+            if (ctx.literal() != null) {
+                try {
+                    Variable variable = new Variable(declarationDataType);
+                    if (ctx.OP_ASSIGN() != null)
+                        variable.setValue(visit(ctx.literal()));
+                    variableMap.put(variableDeclared, variable);
+                } catch (Exception ex) {
+                    semanticErrorList.add(new Error(String.format("variable '%s' initialization failed: %s",
+                            variableDeclared, ex.getMessage()), idToken.getLine(), idToken.getCharPositionInLine() + 1));
+                }
+            } else if (ctx.expression()!=null){
+                try {
+                    Object value = visit(ctx.expression());
+                    Variable variable = new Variable(declarationDataType);
+                    variable.setValue(value);
+                    variableMap.put(variableDeclared,variable);
+                } catch (Exception ex) {
+                    semanticErrorList.add(new Error(String.format("variable '%s' cannot be assigned to RHS: %s",
+                            variableDeclared, ex.getMessage()), idToken.getLine(), idToken.getCharPositionInLine() + 1));
+                }
+
             }
         }
+        else {
+            if(ctx.expression()!=null) {
+                try {
+                    Object value = visit(ctx.expression());
+                    variableMap.get(variableDeclared).setValue(value);
+                } catch (Exception ex) {
+                    semanticErrorList.add(new Error(String.format("variable '%s' cannot be assigned to RHS: %s",
+                            variableDeclared, ex.getMessage()), idToken.getLine(), idToken.getCharPositionInLine() + 1));
+                }
+            }
+            else{
+                    semanticErrorList.add(new Error(String.format("variable '%s' is previously declared", variableDeclared),
+                            idToken.getLine(), idToken.getCharPositionInLine() + 1));
+                }
+        }
+
         return null;
     }
-
     private final StringBuilder printBuffer = new StringBuilder();
     @Override public Object visitPrint(OrangeParser.PrintContext ctx) {
         visit(ctx.print_argument_list());
@@ -262,8 +294,10 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         } else return visit(ctx.literal());
     }
     @Override public Object visitLiteral(OrangeParser.LiteralContext ctx) {
-        return null;
-        //todo
+        String literal = ctx.getChild(0).getText();
+        if (ctx.INTEGER_L() != null) return Integer.parseInt(literal);
+        else if (ctx.BOOLEAN_L() != null) return Boolean.parseBoolean(literal);
+        else return literal.substring(1, literal.length() - 1);
     }
     public Map<String, Variable> getVariableMap() {
         //TODo
