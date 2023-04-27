@@ -76,6 +76,12 @@ public interface OrangeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRange_for_loop(OrangeParser.Range_for_loopContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link OrangeParser#range}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRange(OrangeParser.RangeContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link OrangeParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
