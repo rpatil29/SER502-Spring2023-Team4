@@ -4,7 +4,6 @@ program: statement_list;
 
 statement_list: statement (OP_SEMICOLON statement)*;
 
-
 statement:assignment | print | conditional | loop;
 /* ASSIGNMENT STATEMENT DEFINITION */
 assignment : (data_type)? IDENTIFIER OP_ASSIGN (literal | expression);
@@ -15,14 +14,6 @@ print_argument_list
     : IDENTIFIER (',' print_argument_list)?
     | literal (',' print_argument_list)? ;
 
-statement: assignment | print | conditional | loop;
-
-assignment: IDENTIFIER OP_ASSIGN literal;
-
-print: 'print' '(' print_argument_list ')' ;
-print_argument_list: literal (',' print_argument_list)? | IDENTIFIER (',' print_argument_list)?;
-
-
 conditional: 'if' '(' expression ')' '{' statement_list '}' ( 'else' '{' statement_list '}')?;
 
 loop: traditional_for_loop | traditional_while_loop | range_for_loop;
@@ -31,11 +22,9 @@ traditional_for_loop: 'for' '(' IDENTIFIER OP_ASSIGN expression_term OP_SEMICOLO
 
 traditional_while_loop: 'while' '(' expression ')' '{' statement_list '}';
 
-range_for_loop: 'for' IDENTIFIER 'in' 'range' '(' range ')' '{' statement_list '}';
+range_for_loop: 'for' IDENTIFIER 'in' 'range' '(' expression ')' '{' statement_list '}';
 
-range: INTEGER_L ',' INTEGER_L;
-
-expression: boolean_expression | numeric_expression | comparison_expression | ternary_expression ;
+expression: boolean_expression | numeric_expression | comparison_expression | ternary_expression | string_expression;
 
 boolean_expression: expression_term (OP_LOGICAL_AND | OP_LOGICAL_OR) expression_term | OP_LOGICAL_NOT expression_term | expression_term;
 
@@ -58,11 +47,7 @@ expression_term : IDENTIFIER | literal | BOOLEAN_FALSE | BOOLEAN_TRUE;
 
 IDENTIFIER : [a-zA-Z_][a-zA-Z0-9_]*;
 
-
 literal : STRING_L | INTEGER_L | BOOLEAN_L ;
-=======
-literal : INTEGER_L | BOOLEAN_L | string_expression;
-
 
 BOOLEAN_L : 'true' | 'false';
 

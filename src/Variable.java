@@ -1,7 +1,6 @@
 public class Variable {
     private Object value;
 
-
     public Variable(String dataType) throws Exception {
         switch (dataType) {
             case "int": value = 0; break;
@@ -9,16 +8,6 @@ public class Variable {
             case "string": value = ""; break;
             default: throw new Exception("invalid data type");
         }
-
-    public Variable(String anInt) {
-    }
-
-    public Object getType() {
-        return this.value;
-    }
-    public void setValue(Object value){
-        this.value = this.value;
-
     }
 
     public Object getValue() {
