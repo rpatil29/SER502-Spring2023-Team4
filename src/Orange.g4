@@ -15,7 +15,7 @@ conditional: 'if' '(' expression ')' '{' statement_list '}' ( 'else' '{' stateme
 
 loop: traditional_for_loop | traditional_while_loop | range_for_loop;
 
-traditional_for_loop: 'for' '(' IDENTIFIER OP_ASSIGN expression_term OP_SEMICOLON comparison_expression OP_SEMICOLON expression ')' '{' statement_list '}';
+traditional_for_loop: 'for' '(' data_type IDENTIFIER OP_ASSIGN expression_term OP_SEMICOLON comparison_expression OP_SEMICOLON expression ')' '{' statement_list '}';
 
 traditional_while_loop: 'while' '(' expression ')' '{' statement_list '}';
 
