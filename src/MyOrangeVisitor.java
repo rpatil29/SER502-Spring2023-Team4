@@ -134,9 +134,10 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
             Variable variable = new Variable("int");
             variable.setValue(start);
             variableMap.put(variableDeclared, variable);
-            for (int i = start; (Boolean)visit(ctx.comparison_expression()); visit(ctx.expression())) {
-                variableMap.get(variableDeclared).setValue(i);
+            for (int i = start; (Boolean)visit(ctx.comparison_expression());) {
+                int temp = (Integer)visit(ctx.expression());
                 visit(ctx.statement_list());
+                variableMap.get(variableDeclared).setValue(temp);
             }
         } catch (Exception ignored) {
         } finally {
@@ -242,6 +243,23 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     @Override public Object visitNumeric_expression(OrangeParser.Numeric_expressionContext ctx) {
         if (ctx.numeric_expression().size() == 0)
             return visitChildren(ctx);
+        else if(ctx.OP_SUCCESSOR() !=null || ctx.OP_PREDECESSOR() !=null){
+            Object leftOperand = visit(ctx.numeric_expression(0));
+            TerminalNode operatorNode = ctx.OP_SUCCESSOR() != null ? ctx.OP_SUCCESSOR()
+                    : ctx.OP_PREDECESSOR();
+            Token operatorToken = operatorNode.getSymbol();
+            String operator = operatorNode.getText();
+            if (leftOperand instanceof Integer) {
+                int leftOperandInt = (Integer) leftOperand;
+
+                if (operator.equals("++")) return leftOperandInt +1;
+                else if (operator.equals("--")) return leftOperandInt -1;
+            }
+            else {
+                semanticErrorList.add(new Error("unsupported operands in arithmetic expression",
+                        operatorToken.getLine(), operatorToken.getCharPositionInLine() + 1));
+            }
+        }
         else if (ctx.numeric_expression().size() == 1)
             return visit(ctx.numeric_expression(0));
 
@@ -271,22 +289,6 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
                     semanticErrorList.add(new Error("unsupported operands in arithmetic expression",
                             operatorToken.getLine(), operatorToken.getCharPositionInLine() + 1));
                 }
-            }
-        }
-        else{
-            TerminalNode operatorNode = ctx.OP_SUCCESSOR() != null ? ctx.OP_SUCCESSOR()
-                    : ctx.OP_PREDECESSOR();
-            Token operatorToken = operatorNode.getSymbol();
-            String operator = operatorNode.getText();
-            if (leftOperand instanceof Integer) {
-                int leftOperandInt = (Integer) leftOperand;
-
-                if (operator.equals("++")) return leftOperandInt +1;
-                else if (operator.equals("--")) return leftOperandInt -1;
-            }
-            else {
-                semanticErrorList.add(new Error("unsupported operands in arithmetic expression",
-                        operatorToken.getLine(), operatorToken.getCharPositionInLine() + 1));
             }
         }
 
