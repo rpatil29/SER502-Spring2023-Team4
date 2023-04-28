@@ -24,10 +24,10 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
 
     @Override public Object visitStatement_list(OrangeParser.Statement_listContext ctx) {
-        //while(ctx.statement()!=null) {
+        while (ctx.statement().size() > 1){
             return visitChildren(ctx);
-        //}
-        //return null;
+        }
+        return visitChildren(ctx);
     }
 
     @Override public Object visitStatement(OrangeParser.StatementContext ctx) { return visitChildren(ctx); }

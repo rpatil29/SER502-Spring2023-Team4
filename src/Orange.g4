@@ -9,7 +9,7 @@ statement:assignment | print | conditional | loop;
 assignment : (data_type)? IDENTIFIER OP_ASSIGN (literal | expression);
 
 print: 'print' '(' print_argument_list ')' ;
-print_argument_list: literal (',' print_argument_list)? | IDENTIFIER (',' print_argument_list)?;
+print_argument_list: IDENTIFIER (',' print_argument_list)? |  literal (',' print_argument_list)? | ;
 
 conditional: 'if' '(' expression ')' '{' statement_list '}' ( 'else' '{' statement_list '}')?;
 
