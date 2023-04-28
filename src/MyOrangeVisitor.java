@@ -24,7 +24,10 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
 
     @Override public Object visitStatement_list(OrangeParser.Statement_listContext ctx) {
-        return visitChildren(ctx);
+        //while(ctx.statement()!=null) {
+            return visitChildren(ctx);
+        //}
+        //return null;
     }
 
     @Override public Object visitStatement(OrangeParser.StatementContext ctx) { return visitChildren(ctx); }
@@ -114,8 +117,13 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
 
     @Override public Object visitTraditional_for_loop(OrangeParser.Traditional_for_loopContext ctx) {
-        variableDeclared = ctx.IDENTIFIER().getText();
         Token idToken = ctx.IDENTIFIER().getSymbol();
+
+        if(ctx.data_type()==null){
+            semanticErrorList.add(new Error(String.format("Data Type missing"),
+                    idToken.getLine(), idToken.getCharPositionInLine() + 1));
+        }
+        variableDeclared = ctx.IDENTIFIER().getText();
         if (variableMap.containsKey(variableDeclared)) {
             semanticErrorList.add(new Error(String.format("variable '%s' is previously declared", variableDeclared),
                     idToken.getLine(), idToken.getCharPositionInLine() + 1));
@@ -295,6 +303,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
 
     @Override public Object visitString_term(OrangeParser.String_termContext ctx) {
+
        if(ctx.IDENTIFIER()!=null)
        {
            String identifier = ctx.IDENTIFIER().getText();
