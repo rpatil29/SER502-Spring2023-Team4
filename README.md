@@ -8,6 +8,7 @@ This is a private repository for SER502 Project
     3.Vamsi Kolapalli
     4.Naheer Fatima
     5.Rushikesh Vinod Patil
+    
 **Platform**
 - Mac OS
 - Windows OS
@@ -29,7 +30,6 @@ This is a private repository for SER502 Project
 #### Clone the Repository
 
 `git clone https://github.com/rpatil29/SER502-Spring2023-Team4.git`
-
 
 **Run Instructions**
 
