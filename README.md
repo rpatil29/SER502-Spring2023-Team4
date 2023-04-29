@@ -9,14 +9,13 @@ This is a private repository for SER502 Project
     4.Naheer Fatima
     5.Rushikesh Vinod Patil
 **Platform**
-
 - Mac OS
 - Windows OS
 - Linux OS
 
 **Tools**
 
-- ANTLR Tool
+- ANTLR Tool: ANTLR(Another Tool for Language Recognition) is a powerful parser generator for reading, processing, executing, or translating structured text or binary files. It's widely used to build languages, tools, and frameworks. From a grammar, ANTLR generates a parser that can build and walk parse trees.
 - Java Language
 
 **Data Structures**
