@@ -4,7 +4,7 @@ program: statement_list;
 
 statement_list: statement (OP_SEMICOLON statement)*;
 
-statement:assignment | print | conditional | loop;
+statement: print | expression | assignment | conditional | loop;
 
 assignment : (data_type)? IDENTIFIER OP_ASSIGN (literal | expression);
 
@@ -27,7 +27,7 @@ expression: boolean_expression | numeric_expression | comparison_expression | te
 
 boolean_expression: expression_term (OP_LOGICAL_AND | OP_LOGICAL_OR) expression_term | OP_LOGICAL_NOT expression_term | expression_term;
 
-comparison_expression: expression_term (OP_EQUALS | OP_GREATER | OP_SMALLER | OP_GREATER_EQUALS | OP_SMALLER_EQUALS) expression_term;
+comparison_expression: expression_term (OP_EQUALS | OP_GREATER | OP_SMALLER | OP_GREATER_EQUALS | OP_SMALLER_EQUALS) expression_term | expression_term;
 
 numeric_expression: expression_term
                     | '(' numeric_expression ')'
@@ -40,7 +40,7 @@ string_expression: string_term ( OP_ADD string_term)*;
 
 string_term: STRING_L | IDENTIFIER;
 
-ternary_expression: boolean_expression OP_TERNARY_TRUE expression OP_TERNARY_FALSE expression;
+ternary_expression: comparison_expression OP_TERNARY_TRUE expression OP_TERNARY_FALSE expression;
 
 expression_term : IDENTIFIER | literal | BOOLEAN_FALSE | BOOLEAN_TRUE;
 

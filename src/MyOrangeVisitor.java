@@ -301,12 +301,21 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
 
     @Override public Object visitString_expression(OrangeParser.String_expressionContext ctx) {
-    StringBuilder sb = new StringBuilder();
+        System.out.println(ctx.children.toString());
+        if (ctx.children.size() > 1) {
+            String rightString = (String) visitString_term(ctx.string_term(0));
+            String leftString = (String) visitString_term(ctx.string_term(1));
+            return rightString.substring(1,rightString.length()-1)+leftString.substring(1,leftString.length()-1);
+        } else {
+            return ((String) visitString_term(ctx.string_term(0))).substring(1,((String) visitString_term(ctx.string_term(0))).length()-1);
+        }
+     /*   StringBuilder sb = new StringBuilder();
     for ( OrangeParser.String_termContext termContext : ctx.string_term())
     {
         sb.append(visitString_term(termContext));
     }
     return sb.toString();
+    }*/
     }
 
     @Override public Object visitString_term(OrangeParser.String_termContext ctx) {
@@ -315,7 +324,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
        {
            String identifier = ctx.IDENTIFIER().getText();
            Token idToken = ctx.IDENTIFIER().getSymbol();
-           if (variableMap.containsKey(identifier)) {
+           if (!variableMap.containsKey(identifier)) {
                return variableMap.get(identifier).getValue();
            } else {
                semanticErrorList.add(new Error(String.format("variable '%s' is not declared", identifier),
@@ -334,7 +343,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
 
     @Override public Object visitTernary_expression(OrangeParser.Ternary_expressionContext ctx) {
-        Object conditionValue = visit(ctx.boolean_expression());
+        Object conditionValue = visit(ctx.comparison_expression());
         Object value1 = visit(ctx.expression(0));
         Object value2 = visit(ctx.expression(1));
         return (Boolean) conditionValue ? value1 : value2;
@@ -357,7 +366,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
         String literal = ctx.getChild(0).getText();
         if (ctx.INTEGER_L() != null) return Integer.parseInt(literal);
         else if (ctx.BOOLEAN_L() != null) return Boolean.parseBoolean(literal);
-        else return literal.substring(1, literal.length() - 1);
+        else return visitString_expression(ctx.string_expression());
     }
     public Map<String, Variable> getVariableMap() {
         return variableMap;
