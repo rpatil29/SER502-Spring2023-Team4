@@ -301,21 +301,13 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     }
 
     @Override public Object visitString_expression(OrangeParser.String_expressionContext ctx) {
-        System.out.println(ctx.children.toString());
         if (ctx.children.size() > 1) {
             String rightString = (String) visitString_term(ctx.string_term(0));
             String leftString = (String) visitString_term(ctx.string_term(1));
-            return rightString.substring(1,rightString.length()-1)+leftString.substring(1,leftString.length()-1);
+            return rightString + leftString;
         } else {
-            return ((String) visitString_term(ctx.string_term(0))).substring(1,((String) visitString_term(ctx.string_term(0))).length()-1);
+            return visitString_term(ctx.string_term(0));
         }
-     /*   StringBuilder sb = new StringBuilder();
-    for ( OrangeParser.String_termContext termContext : ctx.string_term())
-    {
-        sb.append(visitString_term(termContext));
-    }
-    return sb.toString();
-    }*/
     }
 
     @Override public Object visitString_term(OrangeParser.String_termContext ctx) {
@@ -333,7 +325,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
        }
        else {
            try {
-               return ctx.STRING_L().toString();
+               return ctx.STRING_L().toString().substring(1,ctx.STRING_L().toString().length()-1);
            }
            catch (Exception e){
                System.out.println(e);
