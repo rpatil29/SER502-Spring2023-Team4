@@ -68,4 +68,4 @@ java -jar SER502_Spring2023_Team4.jar
 **Future Scope**
 
 In terms of future scope, the language could be extended to support these advanced features and integrated with 
-other tools and libraries to make it more powerful and useful.  With the increasing concern around security in software development, the language could be extended to include more robust security features. Overall, there are many possibilities for extending and improving the language to make it more powerful, efficient, and useful for a wide range of applications.
+other tools and libraries to make it more powerful and useful.  With the increasing concern around security in software development, the language could be extended to include more robust security features. Additionally, the language could be optimized to improve its performance and make it suitable for building high-performance applications. Overall, there are many possibilities for extending and improving the language to make it more powerful, efficient, and useful for a wide range of applications.
