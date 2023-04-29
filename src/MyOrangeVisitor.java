@@ -34,7 +34,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
     private String variableDeclared = null;
     private String declarationDataType = null;
     @Override public Object visitAssignment(OrangeParser.AssignmentContext ctx) {//(data_type)? IDENTIFIER OP_ASSIGN (literal | expression);
-        if (ctx.data_type().getText() != null) {
+        if (ctx.data_type()!=null && ctx.data_type().getText() != null) {
             declarationDataType = ctx.data_type().getText();
         }
         Token idToken = ctx.IDENTIFIER().getSymbol();
@@ -72,7 +72,7 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
                     semanticErrorList.add(new Error(String.format("variable '%s' cannot be assigned to RHS: %s",
                             variableDeclared, ex.getMessage()), idToken.getLine(), idToken.getCharPositionInLine() + 1));
                 }
-                semanticErrorList.add(new Error(String.format("variable '%s' is not declared", variableDeclared), idToken.getLine(), idToken.getCharPositionInLine() + 1));
+
             } else if (ctx.literal() != null) {
                 try {
                     Object value = visit(ctx.literal());
@@ -84,6 +84,11 @@ public class MyOrangeVisitor extends OrangeBaseVisitor<Object> {
             } else {
                 semanticErrorList.add(new Error(String.format("Empty assignment to '%s' is not allowed"), idToken.getLine(), idToken.getCharPositionInLine() + 1));
             }
+        }
+        else{
+            //Variable not declared
+            semanticErrorList.add(new Error(String.format("variable '%s' is not declared", variableDeclared), idToken.getLine(),
+                    idToken.getCharPositionInLine() + 1));
         }
             return null;
     }
