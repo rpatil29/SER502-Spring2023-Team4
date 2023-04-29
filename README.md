@@ -3,52 +3,65 @@ This is a private repository for SER502 Project
 
 **Team Members:**
 
-1.Rohith Bellapu
-
-2.Aakanksha Jain
-
-3.Vamsi Kolapalli
-
-4.Naheer Fatima
-
-5.Rushikesh Vinod Patil
-
-A demo of the project can be found here after milestone 1
-
+    1.Rohith Bellapu
+    2.Aakanksha Jain
+    3.Vamsi Kolapalli
+    4.Naheer Fatima
+    5.Rushikesh Vinod Patil
 **Platform**
 
-MacOS
-
-Windows
+- Mac OS
+- Windows OS
+- Linux OS
 
 **Tools**
-ANTLR
+
+- ANTLR Tool
+- Java Language
+
+**Data Structures**
+
+- HashMap
+- List
+- Map
 
 **Install Instructions**
 
-git clone https://github.com/rpatil29/SER502-Spring2023-Team4.git
+`git clone https://github.com/rpatil29/SER502-Spring2023-Team4.git`
 
 
 **Run Instructions**
 
+Go to Directory: 
+ **\out\artifacts\SER502_Spring2023_Team4_jar**
+
+Execute the jar file with command
+
+```
+java -jar SER502_Spring2023_Team4.jar
+```
 
 **Highlights**
 
--The language has been designed by drawing inspiration from the java programming language and the syntax has been kept simple and user-friendly.
+- The language has been designed by drawing inspiration from the java programming language and the syntax has been kept simple and user-friendly.
 
--Supports primitive data types such as int, Boolean and String
+- Supports primitive data types such as **int, boolean and string**
 
--Support for Arithmetic operations such as addition, subtraction, multiplication and division on the data types
+- Support for Arithmetic operations such as **addition, subtraction, multiplication and division** on the data types
 
--Support for Logical operations such as AND, OR and NOT.
+- Support for Logical operations such as **&&, || and !**.
 
--Supports looping structures like if-else, for, for in range and while.
+- Supports looping structures like **for loop, for in range loop and while loop.**
 
--Support for Relational operations such as ==, <, > , <=, >=.
+- Support conditional operations: **if-then-else**
 
--Support for Assignment operator which associates a value with an identiﬁer.
+- Support for Relational operations such as **==, <, > , <=, >=.**
 
--Support for ternary operator like ? :
+- Support for Assignment operator which associates a value with an identiﬁer.
+
+- Support for ternary operator like **? :**
+
+- Support for string concatenation (**+**)
 
 **Future Scope**
 
