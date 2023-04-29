@@ -34,6 +34,8 @@ git clone https://github.com/rpatil29/SER502-Spring2023-Team4.git
 
 **Highlights**
 
+-The language has been designed by drawing inspiration from the java programming language and the syntax has been kept simple and user-friendly.
+
 -Supports primitive data types such as int, Boolean and String
 
 -Support for Arithmetic operations such as addition, subtraction, multiplication and division on the data types
@@ -51,5 +53,4 @@ git clone https://github.com/rpatil29/SER502-Spring2023-Team4.git
 **Future Scope**
 
 In terms of future scope, the language could be extended to support these advanced features and integrated with 
-other tools and libraries to make it more powerful and useful. Additionally, the language could be optimized to improve 
-its performance and make it suitable for building high-performance applications
+other tools and libraries to make it more powerful and useful.  With the increasing concern around security in software development, the language could be extended to include more robust security features. Overall, there are many possibilities for extending and improving the language to make it more powerful, efficient, and useful for a wide range of applications.
