@@ -27,6 +27,8 @@ This is a private repository for SER502 Project
 
 **Install Instructions**
 
+#### Clone the Repository
+
 `git clone https://github.com/rpatil29/SER502-Spring2023-Team4.git`
 
 
