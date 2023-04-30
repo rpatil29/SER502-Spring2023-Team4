@@ -1,0 +1,12 @@
+int i=1;
+int a=2;
+print("Output of for :");
+for(int j=1;j<3;j++){print(j)};
+print(" Output for while is :");
+while(i<10)
+{
+ print(i);
+ a=a*i;
+ i=i+1
+}
+print(a)
