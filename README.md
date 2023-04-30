@@ -56,7 +56,7 @@ This is a private repository for SER502 Project
 
 - Supports looping structures like **for loop, for in range loop and while loop.**
 
-- Support conditional operations: **if-then-else**
+- Support conditional operations: **if-else**
 
 - Support for Relational operations such as **==, <, > , <=, >=.**
 
