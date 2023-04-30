@@ -1,0 +1,8 @@
+int c = 1+2;
+print(c);
+int a= 3-2;
+print(" ",a);
+int b= 3*2;
+print(" ",b);
+int d= 4/2;
+print(" ",d)
