@@ -1,0 +1,12 @@
+int x=3;
+boolean flag = false;
+x = flag ? 1:2;
+if(flag)
+{
+ x=10
+}
+else
+{
+ x=5
+};
+print(x)
