@@ -1,0 +1,7 @@
+int x = 3;
+int x1 = 2;
+string z = "hello";
+boolean a = true && false;
+boolean b = true || false;
+boolean c = true;
+boolean d = !true
