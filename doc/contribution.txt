@@ -48,7 +48,7 @@ MILESTONE 2(April 12- April 28)
 4. Vamsi Kolapalli
       -Worked on implementing for if-else evaluator
       -Worked on implementing the for in range evaluator
-      -Did integration 
+      -Prepared presentation slides 
      
 5. Naheer Fatima
       -Prepared the presentation slides
