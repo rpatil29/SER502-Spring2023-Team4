@@ -1219,10 +1219,10 @@ public class OrangeParser extends Parser {
 		public Numeric_expressionContext numeric_expression(int i) {
 			return getRuleContext(Numeric_expressionContext.class,i);
 		}
-		public TerminalNode OP_ADD() { return getToken(OrangeParser.OP_ADD, 0); }
-		public TerminalNode OP_SUB() { return getToken(OrangeParser.OP_SUB, 0); }
 		public TerminalNode OP_MUL() { return getToken(OrangeParser.OP_MUL, 0); }
 		public TerminalNode OP_DIV() { return getToken(OrangeParser.OP_DIV, 0); }
+		public TerminalNode OP_ADD() { return getToken(OrangeParser.OP_ADD, 0); }
+		public TerminalNode OP_SUB() { return getToken(OrangeParser.OP_SUB, 0); }
 		public TerminalNode OP_SUCCESSOR() { return getToken(OrangeParser.OP_SUCCESSOR, 0); }
 		public TerminalNode OP_PREDECESSOR() { return getToken(OrangeParser.OP_PREDECESSOR, 0); }
 		public Numeric_expressionContext(ParserRuleContext parent, int invokingState) {
@@ -1307,7 +1307,7 @@ public class OrangeParser extends Parser {
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 						setState(176);
 						_la = _input.LA(1);
-						if ( !(_la==OP_ADD || _la==OP_SUB) ) {
+						if ( !(_la==OP_MUL || _la==OP_DIV) ) {
 						_errHandler.recoverInline(this);
 						}
 						else {
@@ -1327,7 +1327,7 @@ public class OrangeParser extends Parser {
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
 						setState(179);
 						_la = _input.LA(1);
-						if ( !(_la==OP_MUL || _la==OP_DIV) ) {
+						if ( !(_la==OP_ADD || _la==OP_SUB) ) {
 						_errHandler.recoverInline(this);
 						}
 						else {
@@ -1813,7 +1813,7 @@ public class OrangeParser extends Parser {
 		"\u0014\u0001\u0014\u0003\u0014\u00d6\b\u0014\u0001\u0015\u0001\u0015\u0001"+
 		"\u0015\u0000\u0001\u001e\u0016\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010"+
 		"\u0012\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*\u0000\u0007\u0001\u0000"+
-		"\"#\u0001\u0000\u001d!\u0001\u0000\u0017\u0018\u0001\u0000\u0019\u001a"+
+		"\"#\u0001\u0000\u001d!\u0001\u0000\u0019\u001a\u0001\u0000\u0017\u0018"+
 		"\u0001\u0000\u001b\u001c\u0002\u0000\u0012\u0012((\u0001\u0000\r\u000f"+
 		"\u00e1\u0000,\u0001\u0000\u0000\u0000\u0002.\u0001\u0000\u0000\u0000\u0004"+
 		";\u0001\u0000\u0000\u0000\u0006>\u0001\u0000\u0000\u0000\bF\u0001\u0000"+
