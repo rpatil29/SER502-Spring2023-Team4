@@ -1,0 +1,4 @@
+string res = "hello" + "world";
+print(res);
+string p = "happy";
+print(p)
