@@ -69,7 +69,7 @@ This is a private repository for SER502 Project
 
 **Video Link**
 
-Here is the link for our presenatation:
+Here is the link for our presenatation: https://www.youtube.com/watch?v=tHzP-sgfI-A
 
 **Future Scope**
 
