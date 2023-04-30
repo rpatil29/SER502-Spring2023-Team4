@@ -31,8 +31,8 @@ comparison_expression: expression_term (OP_EQUALS | OP_GREATER | OP_SMALLER | OP
 
 numeric_expression: expression_term
                     | '(' numeric_expression ')'
-                    | numeric_expression (OP_ADD|OP_SUB) numeric_expression
                     | numeric_expression (OP_MUL|OP_DIV) numeric_expression
+                    | numeric_expression (OP_ADD|OP_SUB) numeric_expression
                     | numeric_expression (OP_SUCCESSOR | OP_PREDECESSOR)
                     ;
 
