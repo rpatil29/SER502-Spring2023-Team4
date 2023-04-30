@@ -1,6 +1,8 @@
 # SER502-Spring2023-Team4
 This is a private repository for SER502 Project
 
+## Youtube Video Link : https://youtu.be/tHzP-sgfI-A
+
 **Team Members:**
 
     1.Rohith Bellapu
@@ -27,20 +29,20 @@ This is a private repository for SER502 Project
 
 **Install Instructions**
 
--**Clone the Repository**
+ - **Clone the Repository**
 
-`git clone https://github.com/rpatil29/SER502-Spring2023-Team4.git`
+    `git clone https://github.com/rpatil29/SER502-Spring2023-Team4.git`
 
--**Run Instructions**
+ - **Run Instructions**
+ 
+    Go to Directory: 
+    **\out\artifacts\SER502_Spring2023_Team4_jar**
 
-Go to Directory: 
- **\out\artifacts\SER502_Spring2023_Team4_jar**
+    Execute the jar file with command
 
-Execute the jar file with command
-
-```
-java -jar SER502_Spring2023_Team4.jar
-```
+    ```
+    java -jar SER502_Spring2023_Team4.jar
+    ```
 
 **Highlights**
 
